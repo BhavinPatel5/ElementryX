@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Using Elementryx Components</title>
+    <script src="../dist/elementryx-components.js" type="module"></script>
+    <style>
+        body {
+            background-color: white; /* Light mode background */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+        body.dark-mode {
+            background-color: #000000; /* Dark mode background */
+        }
+
+        h1 {
+            color: black; /* Light mode text color */
+            transition: color 0.3s; /* Smooth transition for text color */
+        }
+
+        body.dark-mode h1 {
+            color: white; /* Dark mode text color */
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Web Components</h1>
+    
+    <ex-button label="Submit">Click Me</ex-button>
+    <ex-dropdown options="Option 1, Option 2, Option 3"></ex-dropdown>
+
+    <button id="toggle-dark-mode">Toggle Dark Mode</button>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        const dropdown = document.querySelector('ex-dropdown');
+        const pageTitle = document.getElementById('page-title');
+
+        toggleButton.addEventListener('click', () => {
+            // Toggle dark mode on the dropdown
+            dropdown.toggleDarkMode();
+
+            // Toggle dark mode class on body
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+
+            // Change the page title based on the dark mode state
+            pageTitle.textContent = isDarkMode ? 'Using Elementryx Components - Dark Mode' : 'Using Elementryx Components';
+        });
+    </script>
+</body>
+</html>
