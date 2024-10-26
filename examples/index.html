@@ -9,19 +9,47 @@
         body {
             background-color: white; /* Light mode background */
             transition: background-color 0.3s; /* Smooth transition for background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            gap: 20px; /* Space between elements */
         }
 
         body.dark-mode {
-            background-color: #000000; /* Dark mode background */
+            background-color: #1c1c1e; /* Dark mode background */
         }
 
         h1 {
             color: black; /* Light mode text color */
             transition: color 0.3s; /* Smooth transition for text color */
+            font-size: 24px;
+            margin: 0;
         }
 
         body.dark-mode h1 {
             color: white; /* Dark mode text color */
+        }
+
+        button, ex-button, ex-dropdown {
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        #toggle-dark-mode {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        #toggle-dark-mode:hover {
+            background-color: #005bb5;
         }
     </style>
 </head>
@@ -36,14 +64,21 @@
     <script>
         const toggleButton = document.getElementById('toggle-dark-mode');
         const dropdown = document.querySelector('ex-dropdown');
+        const exButton = document.querySelector('ex-button');
         const pageTitle = document.getElementById('page-title');
 
         toggleButton.addEventListener('click', () => {
-            // Toggle dark mode on the dropdown
-            dropdown.toggleDarkMode();
-
             // Toggle dark mode class on body
             const isDarkMode = document.body.classList.toggle('dark-mode');
+
+            // Set dark attribute on ex-button and dropdown for styling
+            if (isDarkMode) {
+                exButton.setAttribute('dark', '');
+                dropdown.setAttribute('dark', '');
+            } else {
+                exButton.removeAttribute('dark');
+                dropdown.removeAttribute('dark');
+            }
 
             // Change the page title based on the dark mode state
             pageTitle.textContent = isDarkMode ? 'Using Elementryx Components - Dark Mode' : 'Using Elementryx Components';
